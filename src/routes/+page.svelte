@@ -113,7 +113,9 @@
 		uid_valid = false;
 		iid = -1;
 		actual_pin = '';
-		uid = uid;
+		const temp = uid;
+		uid = '';
+		uid = temp;
 	}
 </script>
 
