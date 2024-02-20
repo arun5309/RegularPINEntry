@@ -115,14 +115,14 @@
 		{#await get_points()}
 			<p>Validating User ID...</p>
 		{:then get_points_value}
-			{console.log(get_points_value)}
-			{#if get_points_value.uid !== undefined}
+			{(console.log(get_points_value), '')}
+			{#if get_points_value.uid !== null}
 				<p style="color: green">Points: {get_points_value.points}</p>
 			{:else}
 				<p style="color: red">Invalid User ID!</p>
 			{/if}
 		{:catch error}
-			{console.log(error)}
+			{(console.log(error), '')}
 			<p style="color: purple">Network Error: Unable to check validity of User ID!</p>
 		{/await}
 	{/if}
