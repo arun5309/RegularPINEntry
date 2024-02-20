@@ -157,7 +157,6 @@
 	{#if actual_pin === value}
 		<p style="color: green">Congratulations on entering the correct PIN!</p>
 	{:else}
-		{(console.log('Actual:', actual_pin, 'Entered:', value), '')}
 		<p style="color: red">Incorrect PIN entered, no points earned!</p>
 	{/if}
 	<br />
