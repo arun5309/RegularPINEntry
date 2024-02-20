@@ -49,6 +49,7 @@
 			instance_response_value_temp.json().then((temp) => {
 				const instance_response_value = <UpdateInstanceResponse>(<unknown>temp);
 				if (iid !== instance_response_value.iid) {
+					console.log(`iid: ${iid} resp_iid: ${instance_response_value.iid}`);
 					alert('Reached invalid state, please report bug!');
 				}
 				game_state = GameState.FINISH;
