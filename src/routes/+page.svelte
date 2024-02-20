@@ -176,6 +176,8 @@
 	<button on:click={() => (show_pin = !show_pin)}>Toggle Visibility of Entered PIN</button>
 	<br />
 	<button on:click={reset}>Play Again</button>
+	<br />
+	<a href="https://142.93.219.243.nip.io/"><button>Checkout Other Games</button></a>
 {/if}
 
 <style>
