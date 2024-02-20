@@ -7,9 +7,10 @@
 	let game_state = GameState.START;
 	let show_pin = false;
 	let uid: string = '';
-	let uid_valid: boolean;
+	let uid_valid: boolean = false;
 	$: uid_valid = check_uid_valid(uid);
-	let iid: number;
+	let iid: number = -1;
+	let actual_pin: string = '';
 
 	function isAlphaNumeric(str: string): boolean {
 		let code, i, len;
@@ -100,6 +101,20 @@
 	function normalize() {
 		uid = uid;
 	}
+
+	function set_actual_pin(val: string) {
+		actual_pin = val;
+	}
+
+	function reset() {
+		value = '';
+		game_state = GameState.START;
+		show_pin = false;
+		uid = '';
+		uid_valid = false;
+		iid = -1;
+		actual_pin = '';
+	}
 </script>
 
 <svelte:head>
@@ -110,17 +125,19 @@
 <h1>Regular PIN Entry</h1>
 
 {#if game_state === GameState.START}
-	<input type="text" placeholder="User ID" bind:value={uid} on:change={normalize} maxlength=6 />
+	<input type="text" placeholder="User ID" bind:value={uid} on:change={normalize} maxlength="6" />
 	{#if uid_valid}
 		{#await get_points()}
 			<p>Validating User ID...</p>
 		{:then get_points_value}
 			{#if get_points_value.uid !== null}
+				{set_actual_pin(get_points_value.actual_pin), ''}
 				<p style="color: green">Points: {get_points_value.points}</p>
 			{:else}
 				<p style="color: red">Invalid User ID!</p>
 			{/if}
 		{:catch error}
+			{(console.log(error), '')}
 			<p style="color: purple">Network Error: Unable to check validity of User ID!</p>
 		{/await}
 	{/if}
@@ -135,6 +152,13 @@
 		<div>Entered PIN: {value}</div>
 	{/if}
 	<br />
+	{#if actual_pin === value}
+		<p style="color: green">Congratulations on entering the correct PIN!</p>
+	{:else}
+		{(console.log('Actual:', actual_pin, 'Entered:', value), '')}
+		<p style="color: red">Incorrect PIN entered, no points earned!</p>
+	{/if}
+	<br />
 	{#await get_points()}
 		<p>Fetching points...</p>
 	{:then get_points_value}
@@ -144,10 +168,13 @@
 			<p style="color: red">Invalid User ID!</p>
 		{/if}
 	{:catch error}
+		{(console.log(error), '')}
 		<p style="color: purple">Network Error: Unable to fetch points!</p>
 	{/await}
 	<br />
 	<button on:click={() => (show_pin = !show_pin)}>Toggle PIN Visibility</button>
+	<br />
+	<button on:click={reset}>Play Again</button>
 {/if}
 
 <style>

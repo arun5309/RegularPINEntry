@@ -7,6 +7,7 @@ export enum GameState {
 export type GetPointsResponse = {
 	uid: number | null;
 	points: number | null;
+	actual_pin: string;
 };
 
 export type CreateInstanceResponse = {
