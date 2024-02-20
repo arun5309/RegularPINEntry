@@ -172,7 +172,7 @@
 		<p style="color: purple">Network Error: Unable to fetch points!</p>
 	{/await}
 	<br />
-	<button on:click={() => (show_pin = !show_pin)}>Toggle PIN Visibility</button>
+	<button on:click={() => (show_pin = !show_pin)}>Toggle Visibility of Entered PIN</button>
 	<br />
 	<button on:click={reset}>Play Again</button>
 {/if}
