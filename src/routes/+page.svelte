@@ -35,7 +35,7 @@
 	function finish_transition() {
 		const url = 'https://142.93.219.243.nip.io/update_instance';
 		const data = {
-			iid: iid,
+			iid_value: iid,
 			result_pin: value
 		};
 		const request = new Request(url, {
