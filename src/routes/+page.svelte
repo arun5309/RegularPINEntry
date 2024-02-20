@@ -46,13 +46,13 @@
 			})
 		});
 		fetch(request).then((instance_response_value_temp) => {
-			const instance_response_value = <UpdateInstanceResponse>(
-				(<unknown>instance_response_value_temp)
-			);
-			if (iid !== instance_response_value.iid) {
-				alert('Reached invalid state, please report bug!');
-			}
-			game_state = GameState.FINISH;
+			instance_response_value_temp.json().then((temp) => {
+				const instance_response_value = <UpdateInstanceResponse>(<unknown>temp);
+				if (iid !== instance_response_value.iid) {
+					alert('Reached invalid state, please report bug!');
+				}
+				game_state = GameState.FINISH;
+			});
 		});
 	}
 
@@ -82,16 +82,19 @@
 			})
 		});
 		fetch(request).then((create_instance_value_temp) => {
-			const create_instance_value = <CreateInstanceResponse>(<unknown>create_instance_value_temp);
-			iid = create_instance_value.iid;
-			game_state = GameState.PROGRESS;
+			create_instance_value_temp.json().then((temp) => {
+				const create_instance_value = <CreateInstanceResponse>(<unknown>temp);
+				iid = create_instance_value.iid;
+				game_state = GameState.PROGRESS;
+			});
 		});
 	}
 
 	async function get_points(): Promise<GetPointsResponse> {
 		const url = `https://142.93.219.243.nip.io/points/${uid.toLowerCase()}`;
 		const request = new Request(url, { method: 'GET' });
-		return <GetPointsResponse>(<unknown>fetch(request));
+		const data = await fetch(request);
+		return <GetPointsResponse>(<unknown>data.json());
 	}
 
 	function normalize() {
@@ -107,7 +110,7 @@
 <h1>Regular PIN Entry</h1>
 
 {#if game_state === GameState.START}
-	<input type="text" placeholder="User ID" bind:value={uid} on:change={normalize}/>
+	<input type="text" placeholder="User ID" bind:value={uid} on:change={normalize} />
 	{#if uid_valid}
 		{#await get_points()}
 			<p>Validating User ID...</p>
