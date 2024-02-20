@@ -110,7 +110,7 @@
 		value = '';
 		game_state = GameState.START;
 		show_pin = false;
-		uid = '';
+		// uid = ''; // Don't reset keep User ID
 		uid_valid = false;
 		iid = -1;
 		actual_pin = '';
