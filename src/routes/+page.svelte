@@ -112,6 +112,7 @@
 		{#await get_points()}
 			<p>Validating User ID...</p>
 		{:then get_points_value}
+			{console.log(get_points_value)}
 			{#if get_points_value.uid !== undefined}
 				<p style="color: green">Points: {get_points_value.points}</p>
 			{:else}
