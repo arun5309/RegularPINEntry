@@ -42,7 +42,7 @@
 			method: 'POST',
 			body: JSON.stringify(data),
 			headers: new Headers({
-				'Content-Type': 'multipart/form-data; charset=UTF-8'
+				'Content-Type': 'application/json; charset=UTF-8'
 			})
 		});
 		fetch(request).then((instance_response_value_temp) => {
