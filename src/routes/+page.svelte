@@ -6,7 +6,7 @@
 	let value = '';
 	let game_state = GameState.START;
 	let show_pin = false;
-	let uid: string;
+	let uid: string = '';
 	let uid_valid: boolean;
 	$: uid_valid = check_uid_valid(uid);
 	let iid: number;
@@ -93,6 +93,10 @@
 		const request = new Request(url, { method: 'GET' });
 		return <GetPointsResponse>(<unknown>fetch(request));
 	}
+
+	function normalize() {
+		uid = uid;
+	}
 </script>
 
 <svelte:head>
@@ -103,12 +107,12 @@
 <h1>Regular PIN Entry</h1>
 
 {#if game_state === GameState.START}
-	<input type="text" placeholder="User ID" bind:value={uid} />
+	<input type="text" placeholder="User ID" bind:value={uid} on:change={normalize}/>
 	{#if uid_valid}
 		{#await get_points()}
 			<p>Validating User ID...</p>
 		{:then get_points_value}
-			{#if get_points_value.uid !== null}
+			{#if get_points_value.uid !== undefined}
 				<p style="color: green">Points: {get_points_value.points}</p>
 			{:else}
 				<p style="color: red">Invalid User ID!</p>
