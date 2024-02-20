@@ -47,6 +47,7 @@
 		});
 		fetch(request).then((instance_response_value_temp) => {
 			instance_response_value_temp.json().then((temp) => {
+				console.log(`temp: ${temp}`);
 				const instance_response_value = <UpdateInstanceResponse>(<unknown>temp);
 				if (iid !== instance_response_value.iid) {
 					console.log(`iid: ${iid} resp_iid: ${instance_response_value.iid}`);
