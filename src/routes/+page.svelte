@@ -47,10 +47,8 @@
 		});
 		fetch(request).then((instance_response_value_temp) => {
 			instance_response_value_temp.json().then((temp) => {
-				console.log('temp:', temp);
 				const instance_response_value = <UpdateInstanceResponse>(<unknown>temp);
 				if (iid !== instance_response_value.iid) {
-					console.log(`iid: ${iid} resp_iid: ${instance_response_value.iid} result_pin: ${value}`);
 					alert('Reached invalid state, please report bug!');
 				}
 				game_state = GameState.FINISH;
@@ -112,19 +110,17 @@
 <h1>Regular PIN Entry</h1>
 
 {#if game_state === GameState.START}
-	<input type="text" placeholder="User ID" bind:value={uid} on:change={normalize} />
+	<input type="text" placeholder="User ID" bind:value={uid} on:change={normalize} maxlength=6 />
 	{#if uid_valid}
 		{#await get_points()}
 			<p>Validating User ID...</p>
 		{:then get_points_value}
-			{(console.log(get_points_value), '')}
 			{#if get_points_value.uid !== null}
 				<p style="color: green">Points: {get_points_value.points}</p>
 			{:else}
 				<p style="color: red">Invalid User ID!</p>
 			{/if}
 		{:catch error}
-			{(console.log(error), '')}
 			<p style="color: purple">Network Error: Unable to check validity of User ID!</p>
 		{/await}
 	{/if}
@@ -148,7 +144,6 @@
 			<p style="color: red">Invalid User ID!</p>
 		{/if}
 	{:catch error}
-		{console.log(error)}
 		<p style="color: purple">Network Error: Unable to fetch points!</p>
 	{/await}
 	<br />
