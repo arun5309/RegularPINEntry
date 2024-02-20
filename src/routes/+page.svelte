@@ -131,7 +131,7 @@
 			<p>Validating User ID...</p>
 		{:then get_points_value}
 			{#if get_points_value.uid !== null}
-				{set_actual_pin(get_points_value.actual_pin), ''}
+				{(set_actual_pin(get_points_value.actual_pin), '')}
 				<p style="color: green">Points: {get_points_value.points}</p>
 			{:else}
 				<p style="color: red">Invalid User ID!</p>
