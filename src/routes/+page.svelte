@@ -24,7 +24,7 @@
 	}
 
 	function check_uid_valid(uid_cand: string): boolean {
-		return uid_cand.length == 6 && isAlphaNumeric(uid_cand);
+		return uid_cand.length === 6 && isAlphaNumeric(uid_cand);
 	}
 
 	function bkspc_handler() {
@@ -58,13 +58,13 @@
 	}
 
 	function enter_handler() {
-		if (value.length == 4) {
+		if (value.length === 4) {
 			finish_transition();
 		}
 	}
 
 	function press_handler(i: number) {
-		if (value.length == 4) return;
+		if (value.length === 4) return;
 		value += String(i);
 	}
 
@@ -127,7 +127,15 @@
 <h1>Regular PIN Entry</h1>
 
 {#if game_state === GameState.START}
-	<input type="text" placeholder="User ID" bind:value={uid} on:change={normalize} maxlength="6" name="userid" id="userid" />
+	<input
+		type="text"
+		placeholder="User ID"
+		bind:value={uid}
+		on:change={normalize}
+		maxlength="6"
+		name="userid"
+		id="userid"
+	/>
 	{#if uid_valid}
 		{#await get_points()}
 			<p>Validating User ID...</p>
