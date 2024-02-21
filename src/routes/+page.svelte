@@ -154,7 +154,7 @@
 	<br />
 	<button on:click={progress_transition}>Start Game</button>
 {:else if game_state === GameState.PROGRESS}
-	<input type="number" placeholder="Enter shifted PIN" bind:value readonly />
+	<input type="number" placeholder="Enter PIN" bind:value readonly />
 	<br />
 	<Keypad {bkspc_handler} {enter_handler} {press_handler} />
 {:else}
