@@ -35,7 +35,7 @@
 	}
 
 	function finish_transition() {
-		const url = 'https://142.93.219.243.nip.io/update_instance';
+		const url = 'https://pinentry.net/update_instance';
 		const data = {
 			iid_value: iid,
 			result_pin: value
@@ -71,7 +71,7 @@
 
 	function progress_transition() {
 		if (!uid_valid) return;
-		const url = 'https://142.93.219.243.nip.io/create_instance';
+		const url = 'https://pinentry.net/create_instance';
 		const data = {
 			game_id: 'RPE',
 			user_id: uid.toLowerCase()
@@ -93,7 +93,7 @@
 	}
 
 	async function get_points(): Promise<GetPointsResponse> {
-		const url = `https://142.93.219.243.nip.io/points/${uid.toLowerCase()}`;
+		const url = `https://pinentry.net/points/${uid.toLowerCase()}`;
 		const request = new Request(url, { method: 'GET' });
 		const data = await fetch(request);
 		return <GetPointsResponse>(<unknown>data.json());
@@ -186,7 +186,7 @@
 	<br />
 	<button on:click={reset}>Play Again</button>
 	<br />
-	<button><a href="https://142.93.219.243.nip.io/">Checkout Other Games</a></button>
+	<button><a href="https://pinentry.net/">Checkout Other Games</a></button>
 {/if}
 
 <style>
