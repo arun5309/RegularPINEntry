@@ -11,7 +11,7 @@
 	$: uid_valid = check_uid_valid(uid);
 	let iid: number = -1;
 	let actual_pin: string = '';
-	const USER_ID_LENGTH = 3;
+	const USER_ID_LENGTH = 6;
 
 	function isAlphaNumeric(str: string): boolean {
 		let code, i, len;
